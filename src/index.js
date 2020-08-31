@@ -1,13 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './App.js';
+import Home from './pages/home'
+import Detail from './pages/detail'
+import Result from './pages/result'
 import * as serviceWorker from './serviceWorker';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  IndexRoute
+} from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+// import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+  <Router>
+  <div>
+    {/* <ul>
+      <li><Link to="/">Home</Link></li>
+      <li><Link to="/detail">About</Link></li>
+      <li><Link to="/result">Contact</Link></li>
+    </ul>
+    <hr/> */}
+    
+      <Route exact path="/" component={Home}/>
+      <Route exact path="/detail" component={Detail}/>
+      <Route exact path="/result" component={Result}/>
+    
+    <Route path="/about" component={Detail}/>
+    <Route path="/contact" component={Result}/>
+  </div>
+</Router>,
   document.getElementById('root')
 );
 
