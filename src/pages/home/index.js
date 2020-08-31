@@ -16,7 +16,7 @@ class Home extends React.Component {
    componentDidMount() {
       fetch("https://api.themoviedb.org/3/movie/popular?api_key=e5311b9ae6407dbed2cc61fa8d677bcc&language=en-US&page=1")
       .then(response => response.json())
-      .then(data => this.setState({ hits: data.results }));
+      .then(data => this.setState({ hits: data.results.slice(0, 12) }));
 
    }
 
@@ -37,31 +37,26 @@ class Home extends React.Component {
              <hr/>
              <div>
                 <div className="row px-3">
-                <ul>
-                  {hits.map(hit =>
-                    <li key={hit.objectID}>
-                      <a href={hit.id}>{hit.title}</a>
-                    </li>
-                  )}
-                </ul>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
-                   <div className="col-md-2">
-                     <img src="https://i.pinimg.com/originals/a5/96/2e/a5962eef9507c320c98436e078d4b40f.jpg" width="100%"></img>
-                   </div>
+                  {hits.map((hit,i) => {
+                    return (
+                      <div key={ hit.id } className="col-md-2">
+                      <div className="" style={{ margin:"5px" }}>
+                        <div className="">
+                          <div className="">
+                            {/* <Link href='/kisah/[slug]' as={ `/kisah${list.slug}` }> */}
+                              <a>
+                                <img className="all-radius" key={ hit.id } src={ `https://image.tmdb.org/t/p/w220_and_h330_face/${hit.poster_path}` } style={{ marginBottom: "-6px" }} />
+                                <div className="overlay-black" style={{ borderRadius: "15px" }}>
+                                  <h1 className="" style={{ whiteSpace: "normal" }}>{ hit.title }</h1>
+                                </div>
+                              </a>
+                            {/* </Link> */}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    )})
+                  }
                 </div>
              </div>
              <h1 className="popular-movie-text px-3 pt-3">Top Rated Movie</h1>
